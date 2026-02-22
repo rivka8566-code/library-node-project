@@ -1,9 +1,12 @@
 const Book = require('../models/bookModel');
 
+categories = ["מתח", "מדע בדיוני", "רגש", "היסטוריה", "הרפתקאות", "נוער", "אחר"];
+
+
 exports.getAllBooks = async (req, res, next) => {
     try {
         const books = await Book.find();
-        res.render('books', { books })
+        res.render('showAllBooks', { books })
     }
     catch (err) {
         const error = new Error("Error occurred in Show all books " + err.message);
@@ -15,7 +18,7 @@ exports.getAllBooks = async (req, res, next) => {
 exports.getBookById = async (req, res, next) => {
     try {
         const book = await Book.findById(req.params.id);
-        res.render('book', { book });
+        res.render('bookDetails', { book });
     } catch (err) {
             const error = new Error("Error occurred in Show book by ID " + err.message);
             error.status = 500;
@@ -23,14 +26,21 @@ exports.getBookById = async (req, res, next) => {
         }
 }
 
+exports.addForm = (req, res) => {
+    res.render('addBook', { categories });
+}
+
 exports.addBook = async (req, res, next) => {
     try {
-        const { title, author, imageUrl, isAvliable } = req.body;
+        const { title, author, category, imageUrl, isAvailable, description, isPartOfSeries } = req.body;
         const book = new Book({
             title: title,
             author: author,
+            category: categories[parseInt(category)],
             imageUrl: imageUrl,
-            isAvliable: isAvliable
+            isAvailable: isAvailable === 'on' || isAvailable === 'true' || isAvailable === true,
+            description: description,
+            isPartOfSeries: isPartOfSeries === 'on' || isPartOfSeries === 'true' || isPartOfSeries === true
         })
         await book.save();
         res.redirect('/books');
@@ -41,13 +51,27 @@ exports.addBook = async (req, res, next) => {
     }
 }
 
+exports.updateForm = async (req, res, next) => {
+    try {
+        const book = await Book.findById(req.params.id);
+        res.render('updateBook', { book, categories });
+    } catch (err) {
+        const error = new Error("Error occurred in Show update form " + err.message);
+        error.status = 500;
+        return next(error);
+    }
+}
+
 exports.updateBook = async (req, res, next) => {
     try {
         const book = await Book.findById(req.params.id);
         book.title = req.body.title;
         book.author = req.body.author;
+        book.category = categories[parseInt(req.body.category)];
         book.imageUrl = req.body.imageUrl;
-        book.isAvliable = req.body.isAvliable;
+        book.isAvailable = req.body.isAvailable === 'on' || req.body.isAvailable === 'true' || req.body.isAvailable === true;
+        book.description = req.body.description;
+        book.isPartOfSeries = req.body.isPartOfSeries === 'on' || req.body.isPartOfSeries === 'true' || req.body.isPartOfSeries === true;
         await book.save();
         res.redirect('/books');
     } catch (err) {

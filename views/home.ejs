@@ -1,11 +1,161 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="he" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>ספרייה - דף הבית</title>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Heebo', sans-serif;
+            background: #fafbfc;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+        }
+
+        .hero {
+            background: white;
+            border-radius: 8px;
+            padding: 3rem;
+            text-align: center;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+            border: 1px solid #e1e4e8;
+        }
+
+        .logo {
+            font-size: 4rem;
+            color: #24292e;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: #24292e;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: #586069;
+            margin-bottom: 3rem;
+            font-weight: 400;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .card {
+            background: #f6f8fa;
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.2s ease;
+            border: 1px solid #e1e4e8;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 3px 8px rgba(0,0,0,0.12);
+            border-color: #d1d5da;
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #24292e;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: #24292e;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-desc {
+            font-size: 0.95rem;
+            color: #586069;
+            font-weight: 400;
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                padding: 2rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .logo {
+                font-size: 3rem;
+            }
+
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
-    
+    <div class="container">
+        <div class="hero">
+            <div class="logo">
+                <i class="fas fa-book-open"></i>
+            </div>
+            <h1>מערכת ניהול ספרייה</h1>
+            <p class="subtitle">נהל את הספרים, השואלים וההשאלות שלך בקלות ובפשטות</p>
+
+            <div class="cards-grid">
+                <a href="/books" class="card">
+                    <div class="card-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <h3 class="card-title">ספרים</h3>
+                    <p class="card-desc">צפה ונהל את כל הספרים בספרייה</p>
+                </a>
+
+                <a href="/borrowers" class="card">
+                    <div class="card-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3 class="card-title">שואלים</h3>
+                    <p class="card-desc">נהל את רשימת השואלים</p>
+                </a>
+
+                <a href="/loans" class="card">
+                    <div class="card-icon">
+                        <i class="fas fa-exchange-alt"></i>
+                    </div>
+                    <h3 class="card-title">השאלות</h3>
+                    <p class="card-desc">נהל את כל ההשאלות במערכת</p>
+                </a>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

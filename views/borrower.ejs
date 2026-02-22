@@ -3,263 +3,377 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>פרטי שואל - ספרייה</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>פרטי שואל</title>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
+            font-family: 'Heebo', sans-serif;
+            background: #fafbfc;
+            color: #24292e;
+            line-height: 1.6;
         }
-        .container { padding-top: 2rem; }
-        .card {
-            border: none;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            backdrop-filter: blur(10px);
-            background: rgba(255,255,255,0.95);
+
+        .navbar {
+            background: white;
+            padding: 1rem 0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
         }
-        .card-header {
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            border-radius: 15px 15px 0 0 !important;
-            color: white;
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #24292e;
+        }
+
+        .btn {
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            border: 1px solid #d1d5da;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-family: 'Heebo', sans-serif;
+            background: white;
+            color: #24292e;
+        }
+
+        .btn:hover {
+            background: #f6f8fa;
+            border-color: #959da5;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 20px;
+        }
+
+        .profile-section {
+            display: grid;
+            grid-template-columns: 350px 1fr;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .profile-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+            border: 1px solid #e1e4e8;
+        }
+
+        .profile-header {
+            background: #f6f8fa;
+            padding: 2rem;
+            text-align: center;
+            border-bottom: 1px solid #e1e4e8;
+        }
+
+        .profile-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            color: #24292e;
+        }
+
+        .profile-name {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #24292e;
+        }
+
+        .profile-body {
             padding: 1.5rem;
         }
-        .btn-custom {
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            border: none;
-            border-radius: 25px;
-            padding: 0.5rem 1.5rem;
-            color: white;
-            transition: all 0.3s ease;
-        }
-        .btn-custom:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            color: white;
-        }
-        .info-card {
-            background: linear-gradient(45deg, #f093fb 0%, #f5576c 100%);
-            color: white;
-            border-radius: 10px;
-        }
-        .book-item {
-            transition: transform 0.2s;
-            border-radius: 10px;
-        }
-        .book-item:hover {
-            transform: translateY(-2px);
-        }
-        .status-badge {
+
+        .profile-info p {
+            margin: 0.8rem 0;
             font-size: 0.9rem;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
+            color: #586069;
+        }
+
+        .profile-info strong {
+            color: #24292e;
+            display: block;
+            margin-bottom: 0.2rem;
+        }
+
+        .stats-card {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+            border: 1px solid #e1e4e8;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 1.2rem;
+            background: #f6f8fa;
+            border-radius: 6px;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #24292e;
+        }
+
+        .stat-label {
+            color: #586069;
+            font-size: 0.85rem;
+            margin-top: 0.3rem;
+        }
+
+        .books-section {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+            border: 1px solid #e1e4e8;
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1.2rem;
+            color: #24292e;
+        }
+
+        .books-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1rem;
+        }
+
+        .book-card {
+            background: #f6f8fa;
+            border-radius: 6px;
+            padding: 1.2rem;
+            transition: all 0.2s ease;
+            border: 1px solid #e1e4e8;
+        }
+
+        .book-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+
+        .book-title {
+            font-size: 1rem;
+            font-weight: 500;
+            color: #24292e;
+            margin-bottom: 0.4rem;
+        }
+
+        .book-info {
+            font-size: 0.85rem;
+            color: #586069;
+            margin: 0.2rem 0;
+        }
+
+        .book-actions {
+            display: flex;
+            gap: 0.4rem;
+            margin-top: 0.8rem;
+        }
+
+        .btn-sm {
+            padding: 0.4rem 0.8rem;
+            font-size: 0.8rem;
+            flex: 1;
+            text-align: center;
+            border-radius: 4px;
+            border: 1px solid #d1d5da;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            color: #24292e;
+            background: white;
+        }
+
+        .btn-sm:hover {
+            background: #f6f8fa;
+            border-color: #959da5;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 2rem;
+            color: #586069;
+        }
+
+        .empty-state i {
+            font-size: 2.5rem;
+            color: #959da5;
+            margin-bottom: 0.8rem;
+        }
+
+        .actions-section {
+            display: flex;
+            gap: 0.8rem;
+            margin-top: 1.5rem;
+        }
+
+        .btn-delete {
+            color: #d73a49;
+            border-color: #d73a49;
+        }
+
+        .btn-delete:hover {
+            background: #ffeef0;
+        }
+
+        @media (max-width: 968px) {
+            .profile-section {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .books-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-title">
+                <i class="fas fa-user"></i> פרטי שואל
+            </div>
+            <a href="/borrowers" class="btn">
+                <i class="fas fa-arrow-right"></i> חזור לרשימה
+            </a>
+        </div>
+    </nav>
+
     <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-10">
-                <!-- כותרת וניווט -->
-                <div class="card mb-4">
-                    <div class="card-header d-flex justify-content-between align-items-center">
-                        <h2><i class="fas fa-user me-3"></i>פרטי שואל</h2>
-                        <div>
-                            <a href="/borrowers" class="btn btn-light me-2">
-                                <i class="fas fa-arrow-right me-1"></i>חזור לרשימה
-                            </a>
-                            <a href="/borrowers/update/<%= borrower._id %>" class="btn btn-warning">
-                                <i class="fas fa-edit me-1"></i>ערוך
-                            </a>
-                        </div>
+        <div class="profile-section">
+            <div class="profile-card">
+                <div class="profile-header">
+                    <div class="profile-icon">
+                        <i class="fas fa-user-circle"></i>
+                    </div>
+                    <div class="profile-name"><%= borrower.name || 'ללא שם' %></div>
+                </div>
+                <div class="profile-body">
+                    <div class="profile-info">
+                        <p>
+                            <strong><i class="fas fa-envelope"></i> אימייל</strong>
+                            <%= borrower.email || 'לא צוין' %>
+                        </p>
+                        <p>
+                            <strong><i class="fas fa-phone"></i> טלפון</strong>
+                            <%= borrower.phone || 'לא צוין' %>
+                        </p>
+                        <p>
+                            <strong><i class="fas fa-map-marker-alt"></i> כתובת</strong>
+                            <%= borrower.address || 'לא צוינה' %>
+                        </p>
+                    </div>
+                    <div class="actions-section">
+                        <a href="/borrowers/update/<%= borrower._id %>" class="btn" style="flex: 1;">
+                            <i class="fas fa-edit"></i> ערוך
+                        </a>
+                        <button onclick="deleteBorrower('<%= borrower._id %>')" class="btn btn-delete" style="flex: 1;">
+                            <i class="fas fa-trash"></i> מחק
+                        </button>
                     </div>
                 </div>
+            </div>
 
-                <div class="row">
-                    <!-- פרטי השואל -->
-                    <div class="col-md-4">
-                        <div class="card info-card mb-4">
-                            <div class="card-body text-center">
-                                <div class="mb-3">
-                                    <i class="fas fa-user-circle fa-5x"></i>
-                                </div>
-                                <h4><%= borrower.name || 'ללא שם' %></h4>
-                                <p class="mb-2">
-                                    <i class="fas fa-envelope me-2"></i>
-                                    <%= borrower.email || 'לא צוין' %>
-                                </p>
-                                <p class="mb-2">
-                                    <i class="fas fa-phone me-2"></i>
-                                    <%= borrower.phone || 'לא צוין' %>
-                                </p>
-                                <p class="mb-0">
-                                    <i class="fas fa-map-marker-alt me-2"></i>
-                                    <%= borrower.address || 'לא צוינה' %>
-                                </p>
-                            </div>
-                        </div>
-
-                        <!-- סטטיסטיקות -->
-                        <div class="card">
-                            <div class="card-header bg-info text-white">
-                                <h5><i class="fas fa-chart-bar me-2"></i>סטטיסטיקות</h5>
-                            </div>
-                            <div class="card-body">
-                                <div class="row text-center">
-                                    <div class="col-6">
-                                        <div class="border-end">
-                                            <h3 class="text-primary">
-                                                <%= (borrower.borrowedBooks && borrower.borrowedBooks.length) || 0 %>
-                                            </h3>
-                                            <small class="text-muted">ספרים שאולים</small>
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <h3 class="text-success">
-                                            <%= borrower.totalBorrowed || 0 %>
-                                        </h3>
-                                        <small class="text-muted">סה"כ השאלות</small>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+            <div class="stats-card">
+                <h3 class="section-title"><i class="fas fa-chart-bar"></i> סטטיסטיקות</h3>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-number"><%= (borrower.borrowedBooks && borrower.borrowedBooks.length) || 0 %></div>
+                        <div class="stat-label">ספרים שאולים כרגע</div>
                     </div>
-
-                    <!-- ספרים שאולים -->
-                    <div class="col-md-8">
-                        <div class="card">
-                            <div class="card-header bg-success text-white d-flex justify-content-between align-items-center">
-                                <h5><i class="fas fa-books me-2"></i>ספרים שאולים כרגע</h5>
-                                <span class="status-badge bg-light text-dark">
-                                    <%= (borrower.borrowedBooks && borrower.borrowedBooks.length) || 0 %> ספרים
-                                
-                            </div>
-                            <div class="card-body">
-                                <% if (borrower.borrowedBooks && borrower.borrowedBooks.length > 0) { %>
-                                    <div class="row">
-                                        <% borrower.borrowedBooks.forEach(book => { %>
-                                            <div class="col-md-6 mb-3">
-                                                <div class="card book-item h-100">
-                                                    <div class="card-body">
-                                                        <h6 class="card-title">
-                                                            <i class="fas fa-book text-primary me-2"></i>
-                                                            <%= book.title || 'ללא כותרת' %>
-                                                        </h6>
-                                                        <p class="card-text">
-                                                            <strong>מחבר:</strong> <%= book.author || 'לא צוין' %><br>
-                                                            <strong>ISBN:</strong> <%= book.isbn || 'לא צוין' %><br>
-                                                            <strong>תאריך השאלה:</strong> 
-                                                            <%= book.borrowDate ? new Date(book.borrowDate).toLocaleDateString('he-IL') : 'לא צוין' %>
-                                                        </p>
-                                                        <% 
-                                                        const borrowDate = new Date(book.borrowDate);
-                                                        const dueDate = new Date(borrowDate.getTime() + (14 * 24 * 60 * 60 * 1000)); // 14 ימים
-                                                        const today = new Date();
-                                                        const isOverdue = today > dueDate;
-                                                        %>
-                                                        <div class="d-flex justify-content-between align-items-center">
-                                                            <small class="<%= isOverdue ? 'text-danger' : 'text-success' %>">
-                                                                <i class="fas fa-calendar me-1"></i>
-                                                                החזרה עד: <%= dueDate.toLocaleDateString('he-IL') %>
-                                                            </small>
-                                                            <div class="btn-group">
-                                                                <a href="/books/<%= book._id %>" class="btn btn-sm btn-outline-primary">
-                                                                    <i class="fas fa-eye"></i>
-                                                                </a>
-                                                                <button onclick="returnBook('<%= book._id %>')" class="btn btn-sm btn-outline-success">
-                                                                    <i class="fas fa-undo"></i> החזר
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        <% }) %>
-                                    </div>
-                                <% } else { %>
-                                    <div class="text-center py-4">
-                                        <i class="fas fa-book-open fa-3x text-muted mb-3"></i>
-                                        <h5>אין ספרים שאולים כרגע</h5>
-                                        <p class="text-muted">השואל לא שאל ספרים במערכת</p>
-                                        <a href="/books" class="btn btn-custom">
-                                            <i class="fas fa-plus me-2"></i>השאל ספר
-                                        </a>
-                                    </div>
-                                <% } %>
-                            </div>
-                        </div>
-
-                        <!-- היסטוריית השאלות -->
-                        <div class="card mt-4">
-                            <div class="card-header bg-warning text-dark">
-                                <h5><i class="fas fa-history me-2"></i>היסטוריית השאלות</h5>
-                            </div>
-                            <div class="card-body">
-                                <% if (borrower.borrowHistory && borrower.borrowHistory.length > 0) { %>
-                                    <div class="table-responsive">
-                                        <table class="table table-hover">
-                                            <thead>
-                                                <tr>
-                                                    <th>ספר</th>
-                                                    <th>תאריך השאלה</th>
-                                                    <th>תאריך החזרה</th>
-                                                    <th>סטטוס</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <% borrower.borrowHistory.forEach(record => { %>
-                                                    <tr>
-                                                        <td><%= record.bookTitle %></td>
-                                                        <td><%= new Date(record.borrowDate).toLocaleDateString('he-IL') %></td>
-                                                        <td>
-                                                            <%= record.returnDate ? new Date(record.returnDate).toLocaleDateString('he-IL') : 'לא הוחזר' %>
-                                                        </td>
-                                                        <td>
-                                                            <span class="badge <%= record.returnDate ? 'bg-success' : 'bg-warning' %>">
-                                                                <%= record.returnDate ? 'הוחזר' : 'שאול' %>
-                                                            
-                                                        </td>
-                                                    </tr>
-                                                <% }) %>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                <% } else { %>
-                                    <div class="text-center py-3">
-                                        <i class="fas fa-history fa-2x text-muted mb-2"></i>
-                                        <p class="text-muted">אין היסטוריית השאלות</p>
-                                    </div>
-                                <% } %>
-                            </div>
-                        </div>
+                    <div class="stat-item">
+                        <div class="stat-number"><%= borrower.totalBorrowed || 0 %></div>
+                        <div class="stat-label">סה"כ השאלות</div>
                     </div>
                 </div>
             </div>
         </div>
+
+        <div class="books-section">
+            <h3 class="section-title"><i class="fas fa-book"></i> ספרים שאולים כרגע</h3>
+            <% if (borrower.borrowedBooks && borrower.borrowedBooks.length > 0) { %>
+                <div class="books-grid">
+                    <% borrower.borrowedBooks.forEach(book => { %>
+                        <div class="book-card">
+                            <div class="book-title">
+                                <i class="fas fa-book-open"></i> <%= book.title || 'ללא כותרת' %>
+                            </div>
+                            <div class="book-info"><strong>מחבר:</strong> <%= book.author || 'לא צוין' %></div>
+                            <% if (book.category) { %>
+                                <div class="book-info"><strong>קטגוריה:</strong> <%= book.category %></div>
+                            <% } %>
+                            <% if (book.borrowDate) { %>
+                                <div class="book-info">
+                                    <strong>תאריך השאלה:</strong> <%= new Date(book.borrowDate).toLocaleDateString('he-IL') %>
+                                </div>
+                            <% } %>
+                            <div class="book-actions">
+                                <a href="/books/<%= book._id %>" class="btn-sm">
+                                    <i class="fas fa-eye"></i> צפה
+                                </a>
+                            </div>
+                        </div>
+                    <% }) %>
+                </div>
+            <% } else { %>
+                <div class="empty-state">
+                    <i class="fas fa-book-open"></i>
+                    <h4>אין ספרים שאולים כרגע</h4>
+                    <p>השואל לא שאל ספרים במערכת</p>
+                    <a href="/books" class="btn" style="margin-top: 1rem;">
+                        <i class="fas fa-book"></i> עבור לספרים
+                    </a>
+                </div>
+            <% } %>
+        </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        function returnBook(bookId) {
-            if (confirm('האם אתה בטוח שברצונך להחזיר את הספר?')) {
-                fetch(`/books/return/${bookId}`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        borrowerId: '<%= borrower._id %>'
-                    })
+        function deleteBorrower(id) {
+            if (confirm('האם למחוק את השואל? פעולה זו לא ניתנת לביטול.')) {
+                fetch(`/borrowers/delete/${id}`, {
+                    method: 'DELETE'
                 }).then(response => {
-                    if (response.ok) {
-                        location.reload();
-                    } else {
-                        alert('שגיאה בהחזרת הספר');
-                    }
-                }).catch(error => {
-                    alert('שגיאה בהחזרת הספר');
+                    if (response.ok) window.location.href = '/borrowers';
+                    else alert('שגיאה במחיקת השואל');
                 });
             }
         }

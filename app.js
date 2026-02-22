@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const methodOverride = require('method-override');
 require('dotenv').config();
 require('./db/config');
 const PORT = process.env.PORT;
@@ -10,6 +11,7 @@ app.set("view engine", "ejs");
 app.set("views", __dirname + "/views");
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
+app.use(methodOverride('_method'));
 
 
 app.use('/books', booksRouter)

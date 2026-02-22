@@ -21,9 +21,13 @@ const isBookExist = (req, res, next) => {
 
 router.get('/', bookController.getAllBooks)
 
-router.get('/:id', isBookExist, bookController.getBookById)
+router.get('/add', bookController.addForm)
 
 router.post('/add', bookController.addBook)
+
+router.get('/update/:id', isBookExist, bookController.updateForm)
+
+router.get('/:id', isBookExist, bookController.getBookById)
 
 router.put('/update/:id', isBookExist, bookController.updateBook)
 

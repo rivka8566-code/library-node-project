@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>פרטי ספר</title>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Heebo', sans-serif;
+            background: #fafbfc;
+            color: #24292e;
+            line-height: 1.6;
+        }
+
+        .navbar {
+            background: white;
+            padding: 1rem 0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+        }
+
+        .nav-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #24292e;
+        }
+
+        .btn {
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            border: 1px solid #d1d5da;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-family: 'Heebo', sans-serif;
+            background: white;
+            color: #24292e;
+        }
+
+        .btn:hover {
+            background: #f6f8fa;
+            border-color: #959da5;
+        }
+
+        .btn-borrow {
+            background: #fff3cd;
+            color: #856404;
+            border-color: #ffc107;
+        }
+
+        .btn-borrow:hover {
+            background: #ffc107;
+            color: white;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 0 20px;
+        }
+
+        .book-detail {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+            border: 1px solid #e1e4e8;
+        }
+
+        .book-header {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 2rem;
+            padding: 2rem;
+        }
+
+        .book-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 6px;
+            background: #f6f8fa;
+        }
+
+        .book-header-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .book-title {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #24292e;
+        }
+
+        .book-author {
+            font-size: 1.2rem;
+            color: #586069;
+            margin-bottom: 1.5rem;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 0.5rem 1.2rem;
+            border-radius: 16px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .status-available {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-borrowed {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .book-body {
+            padding: 2rem;
+            border-top: 1px solid #e1e4e8;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .info-item {
+            background: #f6f8fa;
+            padding: 1.2rem;
+            border-radius: 6px;
+        }
+
+        .info-label {
+            font-size: 0.8rem;
+            color: #586069;
+            margin-bottom: 0.4rem;
+        }
+
+        .info-value {
+            font-size: 1rem;
+            font-weight: 500;
+            color: #24292e;
+        }
+
+        .description-section {
+            background: #f6f8fa;
+            padding: 1.5rem;
+            border-radius: 6px;
+            margin-bottom: 2rem;
+        }
+
+        .description-section h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.8rem;
+            color: #24292e;
+        }
+
+        .description-section p {
+            color: #586069;
+            line-height: 1.8;
+        }
+
+        .actions {
+            display: flex;
+            gap: 0.8rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        @media (max-width: 768px) {
+            .book-header {
+                grid-template-columns: 1fr;
+            }
+
+            .book-image {
+                height: 300px;
+            }
+
+            .book-title {
+                font-size: 1.5rem;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-title">
+                <i class="fas fa-book"></i> פרטי ספר
+            </div>
+            <a href="/books" class="btn">
+                <i class="fas fa-arrow-right"></i> חזור לרשימה
+            </a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="book-detail">
+            <div class="book-header">
+                <img src="<%= book.imageUrl %>" 
+                     alt="<%= book.title %>" 
+                     class="book-image"
+                     onerror="this.src='https://via.placeholder.com/300x400?text=No+Image'">
+                <div class="book-header-info">
+                    <div class="book-title"><%= book.title %></div>
+                    <div class="book-author">מאת: <%= book.author %></div>
+                    <span class="status-badge <%= book.isAvailable ? 'status-available' : 'status-borrowed' %>">
+                        <i class="fas <%= book.isAvailable ? 'fa-check-circle' : 'fa-user-clock' %>"></i>
+                        <%= book.isAvailable ? 'זמין להשאלה' : 'שאול כרגע' %>
+                    </span>
+                </div>
+            </div>
+
+            <div class="book-body">
+                <div class="info-grid">
+                    <div class="info-item">
+                        <div class="info-label"><i class="fas fa-tag"></i> קטגוריה</div>
+                        <div class="info-value"><%= book.category %></div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label"><i class="fas fa-list"></i> חלק מסדרה</div>
+                        <div class="info-value"><%= book.isPartOfSeries ? 'כן' : 'לא' %></div>
+                    </div>
+                </div>
+
+                <div class="description-section">
+                    <h3><i class="fas fa-align-right"></i> תיאור הספר</h3>
+                    <p><%= book.description %></p>
+                </div>
+
+                <div class="actions">
+                    <button class="btn btn-borrow">
+                        <i class="fas fa-hand-holding"></i> השאל ספר
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
