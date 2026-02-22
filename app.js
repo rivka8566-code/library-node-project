@@ -16,7 +16,7 @@ app.use('/books', booksRouter)
 app.use('/borrowers', borrowersRouter)
 
 app.get('/', (req, res)=>{
-    res.send('This is the home page')
+    res.render('home', { })
 })
 
 app.use((err, req, res, next) => {
