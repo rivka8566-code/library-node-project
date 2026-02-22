@@ -4,6 +4,7 @@ require('dotenv').config();
 require('./db/config');
 const PORT = process.env.PORT;
 const booksRouter = require('./routers/books/index')
+const borrowersRouter = require('./routers/borrowers/index')
 
 app.set("view engine", "ejs");
 app.set("views", __dirname + "/views");
@@ -12,6 +13,7 @@ app.use(express.json());
 
 
 app.use('/books', booksRouter)
+app.use('/borrowers', borrowersRouter)
 
 app.get('/', (req, res)=>{
     res.send('This is the home page')
