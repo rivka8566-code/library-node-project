@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>כל המשאילים</title>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Heebo', sans-serif;
+            background: #fafbfc;
+            color: #24292e;
+            line-height: 1.6;
+        }
+
+        .navbar {
+            background: white;
+            padding: 1rem 0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #24292e;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 0.8rem;
+        }
+
+        .btn {
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            border: 1px solid #d1d5da;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-family: 'Heebo', sans-serif;
+            background: white;
+            color: #24292e;
+        }
+
+        .btn:hover {
+            background: #f6f8fa;
+            border-color: #959da5;
+        }
+
+        .btn-primary {
+            background: #24292e;
+            color: white;
+            border-color: #24292e;
+        }
+
+        .btn-primary:hover {
+            background: #1b1f23;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 20px;
+        }
+
+        .borrowers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.2rem;
+        }
+
+        .borrower-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+            transition: all 0.2s ease;
+            border: 1px solid #e1e4e8;
+        }
+
+        .borrower-card:hover {
+            box-shadow: 0 3px 8px rgba(0,0,0,0.12);
+            transform: translateY(-2px);
+        }
+
+        .borrower-header {
+            background: #f6f8fa;
+            padding: 1.5rem;
+            border-bottom: 1px solid #e1e4e8;
+        }
+
+        .borrower-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #24292e;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .borrower-body {
+            padding: 1.2rem;
+        }
+
+        .books-count {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1rem;
+            color: #586069;
+            margin-bottom: 1rem;
+        }
+
+        .count-badge {
+            background: #fff3cd;
+            color: #856404;
+            padding: 0.3rem 0.8rem;
+            border-radius: 12px;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .borrower-actions {
+            display: flex;
+            gap: 0.4rem;
+            padding: 1rem;
+            background: #f6f8fa;
+            border-top: 1px solid #e1e4e8;
+        }
+
+        .btn-sm {
+            padding: 0.5rem 1rem;
+            font-size: 0.85rem;
+            text-align: center;
+            border-radius: 4px;
+            border: 1px solid #d1d5da;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            color: #24292e;
+            background: white;
+            flex: 1;
+        }
+
+        .btn-sm:hover {
+            background: #f6f8fa;
+            border-color: #959da5;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 3rem 2rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+        }
+
+        .empty-state i {
+            font-size: 3rem;
+            color: #959da5;
+            margin-bottom: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .borrowers-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-title">
+                <i class="fas fa-users"></i> כל המשאילים
+            </div>
+            <div class="nav-links">
+                <a href="/" class="btn">
+                    <i class="fas fa-home"></i> דף הבית
+                </a>
+                <a href="/borrowers/add" class="btn btn-primary">
+                    <i class="fas fa-plus"></i> הוסף משאיל
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <% if (typeof borrowers !== 'undefined' && borrowers.length > 0) { %>
+            <div class="borrowers-grid">
+                <% borrowers.forEach(borrower => { %>
+                    <div class="borrower-card">
+                        <div class="borrower-header">
+                            <div class="borrower-name">
+                                <i class="fas fa-user-circle"></i>
+                                <%= borrower.name %>
+                            </div>
+                        </div>
+                        <div class="borrower-body">
+                            <div class="books-count">
+                                <i class="fas fa-book"></i>
+                                <span>ספרים בהשאלה:</span>
+                                <span class="count-badge"><%= borrower.borrowedBooks.length %></span>
+                            </div>
+                        </div>
+                        <div class="borrower-actions">
+                            <a href="/borrowers/<%= borrower._id %>" class="btn-sm">
+                                <i class="fas fa-eye"></i> צפה בפרטים
+                            </a>
+                        </div>
+                    </div>
+                <% }) %>
+            </div>
+        <% } else { %>
+            <div class="empty-state">
+                <i class="fas fa-users"></i>
+                <h3>אין משאילים במערכת</h3>
+                <p>התחל בהוספת המשאיל הראשון שלך</p>
+                <a href="/borrowers/add" class="btn btn-primary">
+                    <i class="fas fa-plus"></i> הוסף משאיל ראשון
+                </a>
+            </div>
+        <% } %>
+    </div>
+</body>
+</html>

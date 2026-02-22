@@ -21,13 +21,10 @@ const isborrowerExist = (req, res, next) => {
 
 router.get('/', borrowerController.getAllBorrowedBooks)
 
-router.get('/:id', isborrowerExist, borrowerController.getBorrowerById)
+router.get('/add', borrowerController.addBorrowerForm)
 
 router.post('/add', borrowerController.addBorrower)
 
-router.put('/update/:id', isborrowerExist, borrowerController.updateBorrower)
-
-router.delete('/delete/:id', isborrowerExist, borrowerController.deleteborrower)
-
+router.get('/:id', isborrowerExist, borrowerController.getBorrowerById)
 
 module.exports = router

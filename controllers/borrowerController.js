@@ -1,9 +1,9 @@
-const borrowedBooks = require('../models/borrowerModel');
+const Borrower = require('../models/borrowerModel');
 
 exports.getAllBorrowedBooks = async (req, res, next) => {
     try {
-        const borrowedBooks = await borrowedBooks.find();
-        res.render('borrowers', { borrowedBooks })
+        const borrowers = await Borrower.find().populate('borrowedBooks');
+        res.render('showAllBorrowers', { borrowers });
     }
     catch (err) {
         const error = new Error("Error occurred in Show all borrowers " + err.message);
@@ -14,25 +14,31 @@ exports.getAllBorrowedBooks = async (req, res, next) => {
 
 exports.getBorrowerById = async (req, res, next) => {
     try {
-        const borrower = await borrowedBooks.findById(req.params.id);
-        res.render('borrower', { borrower });
+        const borrower = await Borrower.findById(req.params.id).populate('borrowedBooks');
+        res.render('borrowerDetails', { borrower });
     } catch (err) {
-            const error = new Error("Error occurred in Show borrower by ID " + err.message);
-            error.status = 500;
-            return next(error);
-        }
+        const error = new Error("Error occurred in Show borrower by ID " + err.message);
+        error.status = 500;
+        return next(error);
+    }
+}
+
+exports.addBorrowerForm = (req, res) => {
+    res.render('addBorrower');
 }
 
 exports.addBorrower = async (req, res, next) => {
     try {
-        const { name, date, borrowedBooks } = req.body;
-        const borrower = new borrowedBooks({
+        const { name, phone, address } = req.body;
+        const borrower = new Borrower({
             name: name,
-            date: date,
-            borrowedBooks: borrowedBooks
-        })
+            phone: phone,
+            address: address,
+            borrowedBooks: [],
+            totalBorrowed: 0
+        });
         await borrower.save();
-        res.redirect('/books');
+        res.redirect('/borrowers');
     } catch (err) {
         const error = new Error("Error occurred in Add borrower " + err.message);
         error.status = 500;
@@ -40,30 +46,4 @@ exports.addBorrower = async (req, res, next) => {
     }
 }
 
-exports.updateBorrower = async (req, res, next) => {
-    try {
-        const borrower = await borrowedBooks.findById(req.params.id);
-        borrower.title = req.body.title;
-        borrower.author = req.body.author;
-        borrower.imageUrl = req.body.imageUrl;
-        borrower.isAvliable = req.body.isAvliable;
-        await borrower.save();
-        res.redirect('/borrowers');
-    } catch (err) {
-        const error = new Error("Error occurred in Update borrower " + err.message);
-        error.status = 500;
-        return next(error);
-    }
-}
-
-exports.deleteborrower = async (req, res, next) => {
-    try {
-        await borrowedBooks.deleteOne({ _id: req.params.id });
-        res.redirect('/borrowers');
-    } catch (err) {
-        const error = new Error("Error occurred in Delete borrower " + err.message);
-        error.status = 500;
-        return next(error);
-    }
-}
 

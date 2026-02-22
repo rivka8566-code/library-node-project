@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>פרטי משאיל</title>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Heebo', sans-serif;
+            background: #fafbfc;
+            color: #24292e;
+            line-height: 1.6;
+        }
+
+        .navbar {
+            background: white;
+            padding: 1rem 0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #24292e;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 0.8rem;
+        }
+
+        .btn {
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            border: 1px solid #d1d5da;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-family: 'Heebo', sans-serif;
+            background: white;
+            color: #24292e;
+        }
+
+        .btn:hover {
+            background: #f6f8fa;
+            border-color: #959da5;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 20px;
+        }
+
+        .borrower-info-card {
+            background: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+            border: 1px solid #e1e4e8;
+            margin-bottom: 2rem;
+        }
+
+        .borrower-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #e1e4e8;
+        }
+
+        .borrower-icon {
+            font-size: 3rem;
+            color: #24292e;
+        }
+
+        .borrower-name {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #24292e;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .info-item {
+            background: #f6f8fa;
+            padding: 1.2rem;
+            border-radius: 6px;
+        }
+
+        .info-label {
+            font-size: 0.85rem;
+            color: #586069;
+            margin-bottom: 0.4rem;
+        }
+
+        .info-value {
+            font-size: 1rem;
+            font-weight: 500;
+            color: #24292e;
+        }
+
+        .books-section {
+            background: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+            border: 1px solid #e1e4e8;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: #24292e;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .books-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.2rem;
+        }
+
+        .book-card {
+            background: #f6f8fa;
+            border-radius: 6px;
+            padding: 1.2rem;
+            border: 1px solid #e1e4e8;
+            transition: all 0.2s ease;
+        }
+
+        .book-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+
+        .book-image {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 4px;
+            margin-bottom: 0.8rem;
+            background: white;
+        }
+
+        .book-title {
+            font-size: 1rem;
+            font-weight: 500;
+            color: #24292e;
+            margin-bottom: 0.4rem;
+        }
+
+        .book-author {
+            font-size: 0.85rem;
+            color: #586069;
+            margin-bottom: 0.4rem;
+        }
+
+        .book-category {
+            font-size: 0.8rem;
+            color: #586069;
+        }
+
+        .empty-books {
+            text-align: center;
+            padding: 2rem;
+            color: #586069;
+        }
+
+        .empty-books i {
+            font-size: 2.5rem;
+            color: #959da5;
+            margin-bottom: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .borrower-header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .books-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-title">
+                <i class="fas fa-user"></i> פרטי משאיל
+            </div>
+            <div class="nav-links">
+                <a href="/borrowers" class="btn">
+                    <i class="fas fa-arrow-right"></i> חזור למשאילים
+                </a>
+                <a href="/books" class="btn">
+                    <i class="fas fa-book"></i> לרשימת הספרים
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="borrower-info-card">
+            <div class="borrower-header">
+                <div class="borrower-icon">
+                    <i class="fas fa-user-circle"></i>
+                </div>
+                <div class="borrower-name"><%= borrower.name %></div>
+            </div>
+
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="info-label"><i class="fas fa-phone"></i> טלפון</div>
+                    <div class="info-value"><%= borrower.phone %></div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label"><i class="fas fa-map-marker-alt"></i> כתובת</div>
+                    <div class="info-value"><%= borrower.address %></div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label"><i class="fas fa-book"></i> ספרים בהשאלה</div>
+                    <div class="info-value"><%= borrower.borrowedBooks.length %></div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label"><i class="fas fa-chart-line"></i> סה"כ השאלות</div>
+                    <div class="info-value"><%= borrower.totalBorrowed %></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="books-section">
+            <h3 class="section-title">
+                <i class="fas fa-books"></i>
+                ספרים בהשאלה כרגע
+            </h3>
+
+            <% if (borrower.borrowedBooks && borrower.borrowedBooks.length > 0) { %>
+                <div class="books-grid">
+                    <% borrower.borrowedBooks.forEach(book => { %>
+                        <div class="book-card">
+                            <img src="<%= book.imageUrl %>" 
+                                 alt="<%= book.title %>" 
+                                 class="book-image"
+                                 onerror="this.src='https://via.placeholder.com/280x150?text=No+Image'">
+                            <div class="book-title"><%= book.title %></div>
+                            <div class="book-author">מאת: <%= book.author %></div>
+                            <div class="book-category">קטגוריה: <%= book.category %></div>
+                        </div>
+                    <% }) %>
+                </div>
+            <% } else { %>
+                <div class="empty-books">
+                    <i class="fas fa-book-open"></i>
+                    <h4>אין ספרים בהשאלה כרגע</h4>
+                    <p>המשאיל לא שאל ספרים במערכת</p>
+                </div>
+            <% } %>
+        </div>
+    </div>
+</body>
+</html>
