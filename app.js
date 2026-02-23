@@ -6,6 +6,7 @@ require('./db/config');
 const PORT = process.env.PORT;
 const booksRouter = require('./routers/books/index')
 const borrowersRouter = require('./routers/borrowers/index')
+const borrowingRouter = require('./routers/borrowing/index')
 
 app.set("view engine", "ejs");
 app.set("views", __dirname + "/views");
@@ -16,6 +17,7 @@ app.use(methodOverride('_method'));
 
 app.use('/books', booksRouter)
 app.use('/borrowers', borrowersRouter)
+app.use('/borrowings', borrowingRouter)
 
 app.get('/', (req, res)=>{
     res.render('home', { })
