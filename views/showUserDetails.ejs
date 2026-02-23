@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>פרטי משתמש</title>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Heebo', sans-serif;
+            background: #fafbfc;
+            color: #24292e;
+            line-height: 1.6;
+        }
+
+        .navbar {
+            background: white;
+            padding: 1rem 0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #24292e;
+        }
+
+        .btn {
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            border: 1px solid #d1d5da;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-family: 'Heebo', sans-serif;
+            background: white;
+            color: #24292e;
+        }
+
+        .btn:hover {
+            background: #f6f8fa;
+            border-color: #959da5;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem 20px;
+        }
+
+        .user-card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+            overflow: hidden;
+            border: 1px solid #e1e4e8;
+        }
+
+        .user-header {
+            background: #f6f8fa;
+            padding: 2rem;
+            text-align: center;
+            border-bottom: 1px solid #e1e4e8;
+        }
+
+        .user-icon {
+            font-size: 4rem;
+            color: #24292e;
+            margin-bottom: 1rem;
+        }
+
+        .user-header h1 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            color: #24292e;
+            font-weight: 600;
+        }
+
+        .user-body {
+            padding: 2rem;
+        }
+
+        .info-row {
+            display: flex;
+            padding: 1rem;
+            border-bottom: 1px solid #e1e4e8;
+            align-items: center;
+        }
+
+        .info-row:last-child {
+            border-bottom: none;
+        }
+
+        .info-label {
+            font-weight: 600;
+            color: #586069;
+            min-width: 150px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .info-value {
+            color: #24292e;
+            word-break: break-all;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-title">
+                <i class="fas fa-user"></i> פרטי משתמש
+            </div>
+            <a href="/home" class="btn">
+                <i class="fas fa-home"></i> דף הבית
+            </a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="user-card">
+            <div class="user-header">
+                <div class="user-icon">
+                    <i class="fas fa-user-circle"></i>
+                </div>
+                <h1><%= user.username %></h1>
+            </div>
+            <div class="user-body">
+                <div class="info-row">
+                    <div class="info-label">
+                        <i class="fas fa-user"></i> שם משתמש
+                    </div>
+                    <div class="info-value"><%= user.username %></div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label">
+                        <i class="fas fa-id-card"></i> מזהה
+                    </div>
+                    <div class="info-value"><%= user._id %></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

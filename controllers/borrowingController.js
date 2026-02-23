@@ -42,7 +42,7 @@ exports.addBorrowing = async (req, res, next) => {
         borrower.borrowedBooks.push(req.body.bookId);
         borrower.totalBorrowed += 1;
         await borrower.save();
-        res.redirect('/borrowings');
+        res.redirect('/books');
     }
     catch (err) {
         const error = new Error("Error occurred in Add borrowing " + err.message);

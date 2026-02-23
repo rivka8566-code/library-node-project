@@ -1,12 +1,23 @@
 const Book = require('../models/bookModel');
+const Borrowing = require('../models/borrowingModel');
 
 categories = ["מתח", "מדע בדיוני", "רגש", "היסטוריה", "הרפתקאות", "נוער", "אחר"];
 
 
 exports.getAllBooks = async (req, res, next) => {
     try {
-        const books = await Book.find();
-        res.render('showAllBooks', { books })
+        const books = await Book.find().sort({ _id: -1 });
+        const borrowings = await Borrowing.find({ returnDate: null }).populate('borrower').populate('book');
+        
+        const booksWithBorrower = books.map(book => {
+            const borrowing = borrowings.find(b => b.book._id.toString() === book._id.toString());
+            return {
+                ...book.toObject(),
+                currentBorrower: borrowing ? borrowing.borrower.name : null
+            };
+        });
+        
+        res.render('showAllBooks', { books: booksWithBorrower })
     }
     catch (err) {
         const error = new Error("Error occurred in Show all books " + err.message);
@@ -32,13 +43,13 @@ exports.addForm = (req, res) => {
 
 exports.addBook = async (req, res, next) => {
     try {
-        const { title, author, category, imageUrl, isAvailable, description, isPartOfSeries } = req.body;
+        const { title, author, category, imageUrl, description, isPartOfSeries } = req.body;
         const book = new Book({
             title: title,
             author: author,
             category: categories[parseInt(category)],
             imageUrl: imageUrl,
-            isAvailable: isAvailable === 'on' || isAvailable === 'true' || isAvailable === true,
+            isAvailable: true,
             description: description,
             isPartOfSeries: isPartOfSeries === 'on' || isPartOfSeries === 'true' || isPartOfSeries === true
         })

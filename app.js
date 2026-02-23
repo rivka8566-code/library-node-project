@@ -1,26 +1,34 @@
 const express = require('express');
 const app = express();
+const cookieParser = require('cookie-parser');
 const methodOverride = require('method-override');
 require('dotenv').config();
 require('./db/config');
 const PORT = process.env.PORT;
-const booksRouter = require('./routers/books/index')
-const borrowersRouter = require('./routers/borrowers/index')
-const borrowingRouter = require('./routers/borrowing/index')
-
+const booksRouter = require('./routers/booksRouter')
+const borrowersRouter = require('./routers/borrowersRouter')
+const borrowingRouter = require('./routers/borrowingRouter')
+const userRouter = require('./routers/usersRouter')
+const { authenticateToken } = require('./middleWares/authMiddleWare')
 app.set("view engine", "ejs");
 app.set("views", __dirname + "/views");
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
+app.use(cookieParser());
 app.use(methodOverride('_method'));
 
 
-app.use('/books', booksRouter)
-app.use('/borrowers', borrowersRouter)
-app.use('/borrowings', borrowingRouter)
+app.use('/books', authenticateToken, booksRouter)
+app.use('/borrowers', authenticateToken, borrowersRouter)
+app.use('/borrowings', authenticateToken, borrowingRouter)
+app.use('/users', userRouter)
 
 app.get('/', (req, res)=>{
-    res.render('home', { })
+    res.redirect('/users/login')
+})
+
+app.get('/home', authenticateToken, (req, res)=>{
+    res.render('home', { username: req.user.userName })
 })
 
 app.use((err, req, res, next) => {

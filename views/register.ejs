@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>הרשמה</title>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Heebo', sans-serif;
+            background: #fafbfc;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .register-container {
+            background: white;
+            padding: 3rem;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+            border: 1px solid #e1e4e8;
+            width: 90%;
+            max-width: 450px;
+        }
+
+        .register-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .register-header i {
+            font-size: 3.5rem;
+            color: #24292e;
+            margin-bottom: 1rem;
+        }
+
+        .register-header h1 {
+            font-size: 1.8rem;
+            color: #24292e;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .register-header p {
+            color: #586069;
+            font-size: 0.95rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #24292e;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #d1d5da;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-family: 'Heebo', sans-serif;
+            transition: all 0.2s;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #24292e;
+            box-shadow: 0 0 0 3px rgba(36, 41, 46, 0.1);
+        }
+
+        .btn-register {
+            width: 100%;
+            padding: 0.85rem;
+            background: #24292e;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.2s;
+            font-family: 'Heebo', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .btn-register:hover {
+            background: #1b1f23;
+        }
+
+        .divider {
+            text-align: center;
+            margin: 1.5rem 0;
+            color: #586069;
+            font-size: 0.9rem;
+        }
+
+        .login-link {
+            text-align: center;
+            padding: 1rem;
+            background: #f6f8fa;
+            border-radius: 6px;
+            border: 1px solid #e1e4e8;
+        }
+
+        .login-link a {
+            color: #24292e;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="register-container">
+        <div class="register-header">
+            <i class="fas fa-user-plus"></i>
+            <h1>הרשמה למערכת</h1>
+            <p>צור חשבון חדש והתחל לנהל את הספרייה שלך</p>
+        </div>
+        <form action="/users/register" method="POST">
+            <div class="form-group">
+                <label for="username">שם משתמש</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">סיסמה</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit" class="btn-register">
+                <i class="fas fa-user-check"></i> הירשם
+            </button>
+        </form>
+        <div class="divider">או</div>
+        <div class="login-link">
+            כבר יש לך חשבון? <a href="/users/login">התחבר כאן</a>
+        </div>
+    </div>
+</body>
+</html>

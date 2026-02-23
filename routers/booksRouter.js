@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const bookController = require('../../controllers/bookController')
-const Book = require('../../models/bookModel')
+const bookController = require('../controllers/bookController')
+const Book = require('../models/bookModel')
 
 const isBookExist = (req, res, next) => {
     Book.findById(req.params.id)

@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const borrowerController = require('../../controllers/borrowerController')
-const Borrower = require('../../models/borrowerModel')
+const borrowerController = require('../controllers/borrowerController')
+const Borrower = require('../models/borrowerModel')
 
 const isborrowerExist = (req, res, next) => {
     Borrower.findById(req.params.id)
