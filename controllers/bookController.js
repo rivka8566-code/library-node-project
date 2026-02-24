@@ -8,15 +8,16 @@ exports.getAllBooks = async (req, res, next) => {
     try {
         const books = await Book.find().sort({ _id: -1 });
         const borrowings = await Borrowing.find({ returnDate: null }).populate('borrower').populate('book');
-        
+
         const booksWithBorrower = books.map(book => {
-            const borrowing = borrowings.find(b => b.book._id.toString() === book._id.toString());
+            const borrowing = borrowings.find(b => b.book && b.book._id.toString() === book._id.toString());
+            
             return {
                 ...book.toObject(),
                 currentBorrower: borrowing ? borrowing.borrower.name : null
             };
         });
-        
+
         res.render('showAllBooks', { books: booksWithBorrower })
     }
     catch (err) {
@@ -95,7 +96,11 @@ exports.updateBook = async (req, res, next) => {
 exports.deleteBook = async (req, res, next) => {
     try {
         await Book.deleteOne({ _id: req.params.id });
-        res.redirect('/books');
+        if (req.headers.accept && req.headers.accept.includes('application/json')) {
+            res.json({ message: 'Book deleted successfully' });
+        } else {
+            res.redirect('/books');
+        }
     } catch (err) {
         const error = new Error("Error occurred in Delete book " + err.message);
         error.status = 500;

@@ -21,7 +21,7 @@ app.use(methodOverride('_method'));
 app.use('/books', authenticateToken, booksRouter)
 app.use('/borrowers', authenticateToken, borrowersRouter)
 app.use('/borrowings', authenticateToken, borrowingRouter)
-app.use('/users', userRouter)
+app.use('/user', userRouter)
 
 app.get('/', (req, res)=>{
     res.redirect('/users/login')

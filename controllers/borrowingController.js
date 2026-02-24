@@ -5,7 +5,8 @@ const Book = require('../models/bookModel');
 exports.getAllBorrowedBooks = async (req, res, next) => {
     try {
         const borrowings = await Borrowing.find().populate('borrower').populate('book').sort({ borrowDate: -1 });
-        res.render('showAllBorrowing', { borrowings: borrowings });
+        const validBorrowings = borrowings.filter(b => b.book && b.borrower);
+        res.render('showAllBorrowing', { borrowings: validBorrowings });
     }
     catch (err) {
         const error = new Error("Error occurred in Show all borrowings " + err.message);

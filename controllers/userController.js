@@ -2,7 +2,7 @@ const User = require('../models/userModel')
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-exports.getAllUsers = async (req, res, next) => {
+exports.getUser = async (req, res, next) => {
     try {
         const user = await User.findOne({ username: req.user.userName });
         res.render('showUserDetails', { user: user });
@@ -75,5 +75,5 @@ exports.registerUser = async (req, res, next) => {
 
 exports.logoutUser = (req, res) => {
     res.clearCookie('token');
-    res.redirect('/users/login');
+    res.redirect('/user/login');
 }

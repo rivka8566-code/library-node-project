@@ -3,7 +3,7 @@ const router = express.Router();
 const userController = require('../controllers/userController')
 const { authenticateToken } = require('../middleWares/authMiddleWare');
 
-router.get('/', authenticateToken, userController.getAllUsers)
+router.get('/', authenticateToken, userController.getUser)
 
 router.get('/login', userController.loginForm)
 router.post('/login', userController.loginUser)
